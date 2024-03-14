@@ -2,7 +2,7 @@ import numpy as np
 import moderngl as mg
 import pywavefront as pwf
 
-from vbo_utils import CubeVBO
+from .vbo_utils import CubeVBO
 
 class VBO: 
     def __init__(self, contexte): 
