@@ -2,3 +2,4 @@ moderngl
 numpy 
 pygame 
 PyGLM==2.7.0
+pywavefront
