@@ -4,6 +4,7 @@ import moderngl as mg
 
 import model_utils as mu
 from scene.camera import Camera
+from scene.light import Light
 
 class Window:
     def __init__(self, win_size=(1600, 1000)):
@@ -28,6 +29,8 @@ class Window:
 
         #Camera
         self.camera = Camera(self)
+        #Lumière
+        self.light = Light()
         #Scène 
         self.scene = mu.Cube(self)
     
