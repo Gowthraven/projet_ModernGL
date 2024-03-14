@@ -1,16 +1,16 @@
 import numpy as np
 
 class Triangle: 
-    def __init__(self, engine):
-        self.engine = engine
-        self.contexte = engine.contexte 
+    def __init__(self, window):
+        self.window = window
+        self.contexte = window.contexte 
         self.shader_program = self.get_shader_program('triangle')
         self.vbo = self.create_vbo()
         self.vao = self.create_vao()
         self.on_init()
 
     def on_init(self):
-        self.shader_program['m_projection'].write(self.engine.camera.m_projection)
+        self.shader_program['m_projection'].write(self.window.camera.m_projection)
         
     def render(self): 
         """Render the triangle."""

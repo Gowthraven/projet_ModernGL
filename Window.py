@@ -2,17 +2,16 @@ import sys
 import pygame as pg
 import moderngl as mg
 
-#Import 
 import model_utils as mu
 from scene.camera import Camera
 
-class Engine:
+class Window:
     def __init__(self, win_size=(1600, 1000)):
-        """Initialize the render engine."""
+        """Initialize the render engine's window."""
         pg.init()
         self.WIN_SIZE = win_size
 
-        # openGL context
+        # Contexte OpenGl
         pg.display.gl_set_attribute(pg.GL_CONTEXT_MAJOR_VERSION, 3)
         pg.display.gl_set_attribute(pg.GL_CONTEXT_MINOR_VERSION, 3)
         pg.display.gl_set_attribute(pg.GL_CONTEXT_PROFILE_MASK, pg.GL_CONTEXT_PROFILE_CORE)
@@ -20,12 +19,12 @@ class Engine:
 
         self.contexte = mg.create_context()
         self.contexte.enable(flags=mg.DEPTH_TEST | mg.CULL_FACE)
+
+        # Gestions de la souris
         pg.event.set_grab(True)
         pg.mouse.set_visible(False)
 
         self.clock = pg.time.Clock()
-        self.time = 0
-        self.delta_time = 0
 
         #Camera
         self.camera = Camera(self)
@@ -51,5 +50,3 @@ class Engine:
             self.check_events()
             self.rendering()
             self.clock.tick(60)
-            self.delta_time = self.clock.get_time()
-            self.time = pg.time.get_ticks() * 0.001

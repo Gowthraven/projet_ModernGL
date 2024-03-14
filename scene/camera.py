@@ -6,9 +6,9 @@ NEAR = 0.1
 FAR = 100.0
 
 class Camera: 
-    def __init__(self, engine):
-        self.engine = engine
-        self.aspect_ratio = engine.WIN_SIZE[0] / engine.WIN_SIZE[1]
+    def __init__(self, window):
+        self.window = window
+        self.aspect_ratio = window.WIN_SIZE[0] / window.WIN_SIZE[1]
         self.m_projection = self.get_projection_matrix() #Matrice de projection
 
     def get_projection_matrix(self): 

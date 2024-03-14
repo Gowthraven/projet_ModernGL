@@ -1,8 +1,8 @@
-import Engine   
+from Window import Window
 
 if __name__ == "__main__":
-    engine = Engine.Engine()
-    engine.run()
+    window = Window()
+    window.run()
 
 
 
