@@ -29,7 +29,7 @@ class Window:
         #Camera
         self.camera = Camera(self)
         #Scène 
-        self.scene = mu.Triangle(self)
+        self.scene = mu.Cube(self)
     
     def check_events(self):
         """Check for events and handle them."""
