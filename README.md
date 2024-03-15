@@ -142,6 +142,8 @@ Je tiens à exprimer ma gratitude envers les créateurs des ressources mentionn�
 
 L'implémentation du Linear Blend Skinning (LBS) dans le [code fourni](https://github.com/dlyr/m2igai-anim) est une technique de déformation de maillage 3D couramment utilisée dans l'animation de personnages. Elle permet à un modèle 3D d'articuler de manière réaliste en associant les sommets du maillage à un ou plusieurs os d'un squelette, puis en ajustant leur position en fonction des transformations de ces os.
 
+*Le code modifié n'est pas fourni en raison d'une panne (qui je l'espère n'est pas définitive), de mon PC portable. Néanmoins, je vais essayer dans ce rapport, d'expliquer la démarche d'implémentation avec ce que je me souviens.*
+
 ## Fonctionnement de Base
 
 Dans le contexte du projet, chaque sommet du maillage est influencé par deux os principaux, ce qui est souvent le cas pour des modèles simples comme des cylindres ou des bras articulés. Les poids d'influence de ces os sur un sommet donné déterminent à quel point les transformations (rotations, translations) de chaque os affectent la position finale de ce sommet. Dans notre implémentation, ces poids et les informations de liaison aux os sont stockés directement dans les attributs de chaque sommet du maillage.
@@ -154,7 +156,13 @@ Le maillage est représenté par une classe MiniMesh, qui encapsule les sommets 
 Lors de l'animation, les transformations appliquées aux os sont calculées en fonction des entrées de l'utilisateur ou d'une séquence d'animation prédéfinie. Ces transformations sont ensuite appliquées aux sommets du maillage en fonction de leurs poids d'influence. Le processus de déformation du maillage implique le calcul d'une nouvelle position pour chaque sommet en combinant les transformations des os influents, pondérées par leurs poids respectifs.
 
 ## Calcul du rendu
-Dans la boucle de rendu, chaque sommet du maillage est transformé par les matrices de transformation des os auxquels il est lié, avant d'être envoyé au GPU pour le rendu. Cette étape est souvent gérée par des shaders, qui calculent la position finale des sommets en temps réel, permettant ainsi des animations fluides et réactives.
+Dans la boucle de rendu, chaque sommet du maillage est transformé par les matrices de transformation des os auxquels il est lié, avant d'être envoyé au GPU pour le rendu. Cette étape est souvent gérée par des shaders, qui calculent la position finale des sommets en temps réel, permettant ainsi des animations fluides.
+
+## Implémentation GPU - Shaders 
+
+Pour l'implémentation sur GPU avec des shaders, j'avais commencé par déclarer les entrées tels que les positions des sommets, des normales et des poids (poids0, poids1) qui déterminent l'influence de chaque os sur le sommet. On passe au shader comme uniform, les transformations associées à chaque os (rotation à un os "fixe" -partie restant relativement fixe-, ou rotation appliqué à un os subissant des mouvements importants), ainsi que la transformation globale du maillage. 
+
+Dans le corps principal du shader, on calculerai la nouvelle position de chaque sommet en appliquant les transformations des os en fonction de leurs poids respectifs. On procède avec une interpolation linéaire entre les transformations des os, avec les poids (poids0, poids1) qui représentent la contribution de chaque transformation à la position finale du sommet. Ensuite on repositionne correctement le sommet dans l'espace de la scène avec la matrice de transformation globale.  
 
 ## Conclusion
 Cette implémentation du Linear Blend Skinning permet donc une animation assez réaliste de modèles simples comme le cylindre avec un contrôle sur le mouvement des différentes parties du modèle. Bien que je ne peux fournir mes modifications de code en raison de la défaillance de mon PC portable le contenant, une capture vidéo du rendu a heureusement été réalisée en avance, permettant de documenter le résultat visuel de l'implémentation pour le rapport. Dans la vidéo, lorsqu'une flexion ou une déformation est appliquée au cylindre, l'effet de skinning se manifeste clairement, illustrant la déformation du maillage en fonction des poids attribués.
