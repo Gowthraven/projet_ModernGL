@@ -39,17 +39,25 @@ Pour compiler et exécuter le code :
 2. Installez les dépendances nécessaires avec `pip install -r requirements.txt`.
 3. Lancez le moteur avec `python main.py`.
 
-## Modification de la Scène
+## Modification de la Scène 
 
 [TODO]
 
-### Limitations et Apprentissages
+## Limitations et Apprentissages
+
+### Limitations 
 
 Face au manque de temps, certaines optimisations et fonctionnalités avancées comme le shadowmap dynamique n'ont pu être intégrées. Toutefois, ce mini projet a été l'occasion d'un riche apprentissage, en particulier sur les shaders, renforçant les connaissances acquises l'année précédente.
+
+### Explication des notions implémentées
+
+[TODO]
 
 ## Résultats
 
 Le projet a abouti à la création d'un moteur de rendu fonctionnel capable de gérer une skybox, de l'envmap, et de la shadowmap, avec du softshadow, malgré certains rendus initiaux peu convaincants. Les améliorations successives, après plusieurs tests, ont permis d'obtenir des ombres plus réalistes.
+
+### Ombres 
 
 *Exemple de rendu initial des ombres, montrant un aspect brut.*
 
@@ -58,6 +66,16 @@ Le projet a abouti à la création d'un moteur de rendu fonctionnel capable de g
 *Amélioration significative avec l'intégration d'un soft shadow pour un rendu plus diffus des ombres*
 
 ![Ombre avec shadowmap](https://github.com/Gowthraven/projet_ModernGL/blob/main/images/shadow_2.1.png)
+
+### Skybox / Cubemap 
+
+*Exemple de rendu avec la skybox*
+
+![Rendu de la skybox](https://github.com/Gowthraven/projet_ModernGL/blob/main/images/skybox_render.gif)
+
+### Modèles à microfacette (Projet M1)
+
+[TODO]
 
 
 
@@ -68,3 +86,4 @@ Ce projet a été une opportunité d'apprendre et d'expérimenter avec ModernGL 
 ## Remerciements
 
 Je tiens à exprimer ma gratitude envers les créateurs des ressources éducatives mentionnées, en particulier CoderSpace, pour leurs tutoriels détaillés qui ont grandement facilité mon apprentissage du rendu avec ModernGL, ainsi qu'une meilleure compréhension de certaines notions abordés en cours.
+
