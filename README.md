@@ -164,6 +164,10 @@ Pour l'implémentation sur GPU avec des shaders, j'avais commencé par déclarer
 
 Dans le corps principal du shader, on calculerai la nouvelle position de chaque sommet en appliquant les transformations des os en fonction de leurs poids respectifs. On procède avec une interpolation linéaire entre les transformations des os, avec les poids (poids0, poids1) qui représentent la contribution de chaque transformation à la position finale du sommet. Ensuite on repositionne correctement le sommet dans l'espace de la scène avec la matrice de transformation globale.  
 
+## Piste d'implémentation avec des quaternions
+
+Un quaternion est une extension des nombres complexes utilisée pour représenter les rotations dans l'espace tridimensionnel. Il est composé d'une partie réelle et de trois parties imaginaires, ce qui le rend particulièrement adapté pour encoder des rotations. Donc une adaptation du skinning en utilisant des quaternions au lieu de matrice de rotation, il faudrait remplacer les matrices de transformations associées à chaque os par des quaternions dans leurs définitions. 
+
 ## Conclusion
 Cette implémentation du Linear Blend Skinning permet donc une animation assez réaliste de modèles simples comme le cylindre avec un contrôle sur le mouvement des différentes parties du modèle. Bien que je ne peux fournir mes modifications de code en raison de la défaillance de mon PC portable le contenant, une capture vidéo du rendu a heureusement été réalisée en avance, permettant de documenter le résultat visuel de l'implémentation pour le rapport. Dans la vidéo, lorsqu'une flexion ou une déformation est appliquée au cylindre, l'effet de skinning se manifeste clairement, illustrant la déformation du maillage en fonction des poids attribués.
 
