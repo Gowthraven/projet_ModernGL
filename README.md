@@ -75,7 +75,7 @@ Le projet a abouti à la création d'un moteur de rendu fonctionnel capable de g
 
 ### Modèles à microfacette (Projet M1)
 
-[TODO]
+Voir la [vidéo de démonstration](https://www.youtube.com/watch?v=lCydYZzcLg0) du Projet de M1, onglet surface. 
 
 
 
