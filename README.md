@@ -100,7 +100,7 @@ Fichiers Clés :
 
 ### Limitations
 
-Face au manque de temps, certaines optimisations et fonctionnalités avancées comme le shadowmap dynamique n'ont pu être intégrées. Toutefois, ce mini projet a été l'occasion d'un riche apprentissage, en particulier sur les shaders, renforçant les connaissances acquises l'année précédente.
+Face au manque de temps, certaines optimisations et fonctionnalités avancées comme le shadowmap dynamique n'ont pu être intégrées. Toutefois, ce mini projet a été l'occasion d'un riche apprentissage, en particulier sur les shaders, renforçant les connaissances acquises l'année précédente. Une piste d'implémentation aurait été de mettre à jour "en temps réel" des cartes d'ombres basées sur la position et l'orientation de la source lumineuse, permettant alors d'avoir des ombres qui s'adaptent aux mouvement dans la scène. 
 
 
 ## Résultats
@@ -133,7 +133,34 @@ Voir la [vidéo de démonstration](https://www.youtube.com/watch?v=lCydYZzcLg0) 
 
 Ce projet a été une opportunité d'apprendre et d'expérimenter avec ModernGL et le rendu OpenGL sous Python. Malgré les défis initiaux, les résultats obtenus démontrent la flexibilité et une certaine puissance de Python pour le développement de moteurs de rendu. Les ressources et tutoriels utilisés ont été indispensables pour surmonter les obstacles techniques et parvenir à un résultat satisfaisant.
 
-## Remerciements
+Je tiens à exprimer ma gratitude envers les créateurs des ressources mentionnées, en particulier CoderSpace, pour leurs tutoriels détaillés qui ont grandement facilité mon apprentissage du rendu avec ModernGL, ainsi qu'une meilleure compréhension de certaines notions abordés en cours.
 
-Je tiens à exprimer ma gratitude envers les créateurs des ressources éducatives mentionnées, en particulier CoderSpace, pour leurs tutoriels détaillés qui ont grandement facilité mon apprentissage du rendu avec ModernGL, ainsi qu'une meilleure compréhension de certaines notions abordés en cours.
+
+# Rapport de Projet : Animation Skinning 
+
+![Rendu de la skybox](https://github.com/Gowthraven/projet_ModernGL/blob/main/animation/animation_skinning.gif)
+
+L'implémentation du Linear Blend Skinning (LBS) dans le [code fourni](https://github.com/dlyr/m2igai-anim) est une technique de déformation de maillage 3D couramment utilisée dans l'animation de personnages. Elle permet à un modèle 3D d'articuler de manière réaliste en associant les sommets du maillage à un ou plusieurs os d'un squelette, puis en ajustant leur position en fonction des transformations de ces os.
+
+## Fonctionnement de Base
+
+Dans le contexte du projet, chaque sommet du maillage est influencé par deux os principaux, ce qui est souvent le cas pour des modèles simples comme des cylindres ou des bras articulés. Les poids d'influence de ces os sur un sommet donné déterminent à quel point les transformations (rotations, translations) de chaque os affectent la position finale de ce sommet. Dans notre implémentation, ces poids et les informations de liaison aux os sont stockés directement dans les attributs de chaque sommet du maillage.
+
+## Structure de Données
+
+Le maillage est représenté par une classe MiniMesh, qui encapsule les sommets (Vertex), les faces du maillage et les informations nécessaires pour le rendu OpenGL comme les VAO (Vertex Array Objects) et les VBO (Vertex Buffer Objects). Chaque sommet contient sa position, sa normale, un vecteur de couleurs, et cruciallement, un vecteur de poids définissant la contribution relative de chaque os à la position finale du sommet.
+
+## Transformation des Sommets
+Lors de l'animation, les transformations appliquées aux os sont calculées en fonction des entrées de l'utilisateur ou d'une séquence d'animation prédéfinie. Ces transformations sont ensuite appliquées aux sommets du maillage en fonction de leurs poids d'influence. Le processus de déformation du maillage implique le calcul d'une nouvelle position pour chaque sommet en combinant les transformations des os influents, pondérées par leurs poids respectifs.
+
+## Calcul du rendu
+Dans la boucle de rendu, chaque sommet du maillage est transformé par les matrices de transformation des os auxquels il est lié, avant d'être envoyé au GPU pour le rendu. Cette étape est souvent gérée par des shaders, qui calculent la position finale des sommets en temps réel, permettant ainsi des animations fluides et réactives.
+
+## Conclusion
+Cette implémentation du Linear Blend Skinning permet donc une animation assez réaliste de modèles simples comme le cylindre avec un contrôle sur le mouvement des différentes parties du modèle. Bien que je ne peux fournir mes modifications de code en raison de la défaillance de mon PC portable le contenant, une capture vidéo du rendu a heureusement été réalisée en avance, permettant de documenter le résultat visuel de l'implémentation pour le rapport. Dans la vidéo, lorsqu'une flexion ou une déformation est appliquée au cylindre, l'effet de skinning se manifeste clairement, illustrant la déformation du maillage en fonction des poids attribués.
+
+
+
+
+
 
