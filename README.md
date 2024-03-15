@@ -36,8 +36,20 @@ Le suivi des tutoriels de CoderSpace, en intégrant ModernGL à Pygame, a été 
 Pour compiler et exécuter le code :
 
 1. Assurez-vous que Python est installé sur votre machine, idéalement une version récente.
-2. Installez les dépendances nécessaires avec `pip install -r requirements.txt`.
+2. Installez les dépendances nécessaires avec `pip install -r requirement.txt`.
 3. Lancez le moteur avec `python main.py`.
+
+### Contrôles de la Caméra : 
+
+Les contrôles de la caméra sont modifiables dans le fichier `scene/camera.py`, au besoin.
+
+- Avancer : Z ou Flèche du haut
+- Reculer : S ou Flèche du bas
+- Déplacer à gauche : Q ou Flèche de gauche
+- Déplacer à droite : D ou Flèche de droite
+- Monter : Barre d'espace (Space)
+- Descendre : Alt gauche (LAlt)
+
 
 ## Modification de la Scène 
 
