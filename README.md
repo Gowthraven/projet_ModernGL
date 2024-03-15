@@ -43,12 +43,12 @@ Pour compiler et exécuter le code :
 
 Les contrôles de la caméra sont modifiables dans le fichier `scene/camera.py`, au besoin.
 
-- Avancer : Z ou Flèche du haut
-- Reculer : S ou Flèche du bas
-- Déplacer à gauche : Q ou Flèche de gauche
-- Déplacer à droite : D ou Flèche de droite
-- Monter : Barre d'espace (Space)
-- Descendre : Alt gauche (LAlt)
+- **Avancer** : Z ou Flèche du haut
+- **Reculer** : S ou Flèche du bas
+- **Déplacer à gauche** : Q ou Flèche de gauche
+- **Déplacer à droite** : D ou Flèche de droite
+- **Monter** : Barre d'espace (Space)
+- **Descendre** : Alt gauche (LAlt)
 
 
 ## Modification de la Scène 
