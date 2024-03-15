@@ -74,7 +74,7 @@ Contient les composants relatifs à la mise en scène, tels que la caméra, la l
 Fichiers Clés :
 - `camera.py` (Classe Camera) : Gère la caméra, incluant les mouvements et rotations, offrant une vue dynamique de la scène.
 
-- `light.py` (Classe Light) : Gère l'éclairage de la scène en utilisant des intensités ambiantes, diffuses et spéculaires pour créer des effets d'éclairage réalistes.
+- `light.py` (Classe Light) : Gère l'éclairage de la scène en utilisant des intensités ambiantes, diffuses et spéculaires pour créer des effets d'éclairage réalistes (Phong Lighting).
 
 - `model_utils.py` (Classes Model/ExtendedBaseModel) : Permet d'initialiser et de rendre des modèles 3D, gérant les paramètres tels que la position, la rotation, l'échelle, et les textures. La version avancée ajoute des fonctionnalités telles que la gestion des ombres.
 
@@ -98,6 +98,8 @@ Fichiers Clés :
 
 - **Correction Gamma** : L'application d'une correction gamma avant et après le traitement des couleurs assure une représentation fidèle et dynamique des couleurs à l'écran, améliorant ainsi l'expérience visuelle globale.
 
+- **Skybox**: L'implémentation finale de la skybox se base sur l'utilisation de la matrice inverse de la vue-projection pour gérer les transformations. AU lieu d'utiliser la méthode classique qui nécessite 12 triangles pour former le cube, on simplifie ce processus en utilisant seulement deux, voire un triangle. Dans le clip space, les coordonnées des triangles des plans sont définies, en contournant l'ordre conventionnel des sommets (counter-clockwise). Dans le fragment shader, après avoir rasterisé les coordonnées dans le clip space, en plus d'utiliser une texture de cube map, on introduit une variable unifoorme pour la matrice inverse de la vue-projection, qui permet de revenir aux coordonnées du monde réel. Pour obtenir les coordonnées de texture, on normalise les coordonnées du monde en utilisant une coordonnée homogène. Cette façon d'implémenter la skybox permet d'obtenir un rendu de skybox, tout en utilisant moins de géométrie et en gardant un aspect visuel de très bonne qualité.  
+
 ### Limitations
 
 Face au manque de temps, certaines optimisations et fonctionnalités avancées comme le shadowmap dynamique n'ont pu être intégrées. Toutefois, ce mini projet a été l'occasion d'un riche apprentissage, en particulier sur les shaders, renforçant les connaissances acquises l'année précédente. Une piste d'implémentation aurait été de mettre à jour "en temps réel" des cartes d'ombres basées sur la position et l'orientation de la source lumineuse, permettant alors d'avoir des ombres qui s'adaptent aux mouvement dans la scène. 
@@ -111,17 +113,21 @@ Le projet a abouti à la création d'un moteur de rendu fonctionnel capable de g
 
 *Exemple de rendu initial des ombres, montrant un aspect brut.*
 
-![Ombre avec shadowmap](https://github.com/Gowthraven/projet_ModernGL/blob/main/images/shadow_1.png)
+![Ombre avec shadowmap](./images/shadow_1.png)
 
 *Amélioration significative avec l'intégration d'un soft shadow pour un rendu plus diffus des ombres*
 
-![Ombre avec shadowmap](https://github.com/Gowthraven/projet_ModernGL/blob/main/images/shadow_2.1.png)
+![Ombre avec shadowmap](./images/shadow_2.1.png)
+
+*Autre exemple d'ombres obtenue*
+
+![Exemple rendu d'ombres](./images/video_demo.gif)
 
 ### Skybox / Cubemap 
 
 *Exemple de rendu avec la skybox*
 
-![Rendu de la skybox](https://github.com/Gowthraven/projet_ModernGL/blob/main/images/skybox_render.gif)
+![Rendu de la skybox](./images/skybox_render.gif)
 
 ### Modèles à microfacette (Projet M1)
 
@@ -133,12 +139,14 @@ Voir la [vidéo de démonstration](https://www.youtube.com/watch?v=lCydYZzcLg0) 
 
 Ce projet a été une opportunité d'apprendre et d'expérimenter avec ModernGL et le rendu OpenGL sous Python. Malgré les défis initiaux, les résultats obtenus démontrent la flexibilité et une certaine puissance de Python pour le développement de moteurs de rendu. Les ressources et tutoriels utilisés ont été indispensables pour surmonter les obstacles techniques et parvenir à un résultat satisfaisant.
 
+**Pour le futur :** Il sera envisagé de reprendre ce moteur de rendu, pour expérimenter l'implémentation d'autres méthodes (SSAO, HDR, Bloom, ...).
+
 Je tiens à exprimer ma gratitude envers les créateurs des ressources mentionnées, en particulier CoderSpace, pour leurs tutoriels détaillés qui ont grandement facilité mon apprentissage du rendu avec ModernGL, ainsi qu'une meilleure compréhension de certaines notions abordés en cours.
 
 
 # Rapport de Projet : Animation Skinning 
 
-![Rendu de la skybox](https://github.com/Gowthraven/projet_ModernGL/blob/main/animation/animation_skinning.gif)
+![Rendu de la skybox](./animation/animation_skinning.gif)
 
 L'implémentation du Linear Blend Skinning (LBS) dans le [code fourni](https://github.com/dlyr/m2igai-anim) est une technique de déformation de maillage 3D couramment utilisée dans l'animation de personnages. Elle permet à un modèle 3D d'articuler de manière réaliste en associant les sommets du maillage à un ou plusieurs os d'un squelette, puis en ajustant leur position en fonction des transformations de ces os.
 
