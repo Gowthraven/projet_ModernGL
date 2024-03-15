@@ -8,7 +8,7 @@ class Texture:
         self.window = window
         self.contexte = window.contexte
         self.textures = {}
-        self.textures[0] = self.get_texture(path='assets/textures/grass.jpg')
+        self.textures[0] = self.get_texture(path='assets/textures/grass.png')
         self.textures[1] = self.get_texture(path='assets/textures/rubiks_cube.jpg')
         self.textures['cat'] = self.get_texture(path='assets/cat/Cat_diffuse.jpg')
         self.textures['cabane'] = self.get_texture(path='assets/cabane/Wood_Tower_Col.jpg')

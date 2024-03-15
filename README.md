@@ -51,19 +51,57 @@ Les contrôles de la caméra sont modifiables dans le fichier `scene/camera.py`,
 - **Descendre** : Alt gauche (LAlt)
 
 
-## Modification de la Scène 
+## Structure du code 
 
-[TODO]
+Le projet est structuré autour d'un fichier principal (`main.py`), qui orchestre l'ensemble du processus de rendu en initialisant les éléments clés de la scène tels que la lumière, la caméra, les maillages (mesh), et le moteur de rendu (renderer). Le projet se divise en deux sous-dossiers principaux : render et scene, contenant respectivement les composants liés au rendu et à la mise en scène.
 
-## Limitations et Apprentissages
+### Dossier `render`
 
-### Limitations 
+Ce dossier contient les éléments essentiels au rendu, tels que les maillages, les shaders, les textures, les Vertex Array Objects (VAOs) et les Vertex Buffer Objects (VBOs).
+
+Fichiers Clés :
+- `shaders.py` (Classe Shader) : Charge et gère les shaders (vertex et fragment), essentiels pour définir comment les pixels et les vertices sont traités pendant le rendu.
+
+- `texture.py` (Classe Texture) : Gère les textures avec un système de dictionnaire, optimisant les performances et la qualité à travers l'utilisation de mipmaps et de filtrage anisotrope. Une fonction spécifique assemble les textures de la skybox en une texture cubique, en inversant certaines textures selon leur orientation pour un rendu correct.
+
+- `vao.py` (Classe VAO) : Déclare les VAOs pour les éléments de la scène et leurs ombres. Important pour l'ajout d'éléments à la scène, chaque ajout doit être accompagné d'une déclaration VAO appropriée.
+
+- `vbo_utils.py` et `vbo_elements.py` (Classes VBO) : Fournissent la base pour la déclaration des VBOs spécifiques à chaque objet, en lien avec les attributs définis dans les shaders. `vbo_skybox.py` traite spécifiquement de la skybox. Ces VBO sont ensuite gérés dans un dictionnaire dans `vbo.py`. 
+
+### Dossier `scene`
+Contient les composants relatifs à la mise en scène, tels que la caméra, la lumière, les modèles et le système de rendu.
+
+Fichiers Clés :
+- `camera.py` (Classe Camera) : Gère la caméra, incluant les mouvements et rotations, offrant une vue dynamique de la scène.
+
+- `light.py` (Classe Light) : Gère l'éclairage de la scène en utilisant des intensités ambiantes, diffuses et spéculaires pour créer des effets d'éclairage réalistes.
+
+- `model_utils.py` (Classes Model/ExtendedBaseModel) : Permet d'initialiser et de rendre des modèles 3D, gérant les paramètres tels que la position, la rotation, l'échelle, et les textures. La version avancée ajoute des fonctionnalités telles que la gestion des ombres.
+
+- `render.py` (Classe Render) : Coordonne le rendu global, incluant le rendu des ombres et le rendu principal. Utilise un tampon de profondeur et un framebuffer pour gérer les informations de profondeur nécessaires au calcul des ombres.
+
+- `scene.py` (Classe Scene) : Organise et configure tous les objets de la scène, leur positionnement, leur échelle, etc.
+
+### Détails des Shaders
+- `base.frag` : Gère l'éclairage, les textures, les ombres et la correction gamma. Inclut des fonctions avancées pour le calcul des ombres douces (soft shadows) et utilise un système de coordonnées pour déterminer l'influence des ombres sur les fragments.
+
+- `base.vert` : Prépare les données nécessaires pour chaque vertex, incluant les transformations, l'éclairage et les ombres, en vue du rendu final.
+
+- `shadow_map.vert` : Spécialisé dans la génération de cartes d'ombres, calculant les informations de profondeur du point de vue de la source lumineuse.
+
+- `Shaders de la Skybox` (`skybox.vert` et `skybox.frag`) : Utilisés conjointement pour créer un effet de skybox immersive, simulant un environnement lointain enveloppant la scène.
+
+### Implémentations Notables
+- **Biais Anti-Acné** : Afin d'éviter les artefacts d'ombres communs tels que le "shadow acne", un biais est appliqué lors du calcul des ombres, affinant le rendu et améliorant la qualité visuelle.
+
+- **Ombres Douces (Soft Shadows)** : Grâce à un échantillonnage multi-point et un calcul moyenné, les ombres dans la scène bénéficient d'un adoucissement des bords, offrant un rendu plus naturel et réaliste.
+
+- **Correction Gamma** : L'application d'une correction gamma avant et après le traitement des couleurs assure une représentation fidèle et dynamique des couleurs à l'écran, améliorant ainsi l'expérience visuelle globale.
+
+### Limitations
 
 Face au manque de temps, certaines optimisations et fonctionnalités avancées comme le shadowmap dynamique n'ont pu être intégrées. Toutefois, ce mini projet a été l'occasion d'un riche apprentissage, en particulier sur les shaders, renforçant les connaissances acquises l'année précédente.
 
-### Explication des notions implémentées
-
-[TODO]
 
 ## Résultats
 

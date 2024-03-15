@@ -28,8 +28,7 @@ float lookup(float ox, float oy) {
 }
 
 
-
-float getSoftShadowX64() {
+float getSoftShadow(int n) {
     float shadow;
     float swidth = 0.6;
     float endp = swidth * 3.0 + swidth / 2.0;
@@ -38,7 +37,7 @@ float getSoftShadowX64() {
             shadow += lookup(x, y);
         }
     }
-    return shadow / 64;
+    return shadow / n;
 }
 
 
@@ -62,7 +61,7 @@ vec3 getLight(vec3 color) {
     float spec = pow(max(dot(viewDir, reflectDir), 0), 32);
     vec3 specular = spec * light.I_specular;
 
-    float shadow = getSoftShadowX64();
+    float shadow = getSoftShadow(12);
 
     return color * (ambiant + (diffuse + specular) * shadow);
 }
