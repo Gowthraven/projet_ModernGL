@@ -1,14 +1,18 @@
-import numpy as np
-import moderngl as mg
-import pywavefront as pwf
+from .vbo_utils import *
+from .vbo_elements import *
+from .vbo_skybox import *
 
-from .vbo_utils import CubeVBO
+class VBO:
+    # Classe qui contient les VBOs, dans le GPU
 
-class VBO: 
-    def __init__(self, contexte): 
-        self.vbo = dict()
-        self.vbo['cube'] = CubeVBO(contexte)
-        # self.vbo['triangle'] = TriangleVBO(contexte)
+    def __init__(self, contexte):
+        self.vbos = {}
+        self.vbos['cube'] = CubeVBO(contexte)
+        self.vbos['cat'] = CatVBO(contexte)
+        self.vbos['cabane']  = CabaneVBO(contexte)
+        self.vbos['skybox'] = SkyBoxVBO(contexte)
 
-    def destroy(self): 
-        [vbo.destroy() for vbo in self.vbo.values()]
+    def destroy(self):
+        [vbo.destroy() for vbo in self.vbos.values()]
+
+
