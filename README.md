@@ -119,7 +119,7 @@ Le projet a abouti à la création d'un moteur de rendu fonctionnel capable de g
 
 ![Ombre avec shadowmap](./images/shadow_2.1.png)
 
-*Autre exemple d'ombres obtenue*
+*Autre exemple d'ombres obtenues*
 
 ![Exemple rendu d'ombres](./images/video_demo.gif)
 
